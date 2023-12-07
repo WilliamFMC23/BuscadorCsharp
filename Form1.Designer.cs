@@ -39,6 +39,7 @@ namespace Buscador
             this.lblEdad = new System.Windows.Forms.Label();
             this.txtEdad = new System.Windows.Forms.TextBox();
             this.lblActalizar = new System.Windows.Forms.Label();
+            this.btbActualizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.visorDatos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,10 +84,11 @@ namespace Buscador
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(84, 295);
+            this.txtID.Location = new System.Drawing.Point(85, 291);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(100, 20);
             this.txtID.TabIndex = 4;
+            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
             // 
             // lblNombre
             // 
@@ -99,7 +101,7 @@ namespace Buscador
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(252, 298);
+            this.txtNombre.Location = new System.Drawing.Point(252, 292);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
             this.txtNombre.TabIndex = 6;
@@ -115,7 +117,7 @@ namespace Buscador
             // 
             // txtEdad
             // 
-            this.txtEdad.Location = new System.Drawing.Point(406, 301);
+            this.txtEdad.Location = new System.Drawing.Point(406, 292);
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(100, 20);
             this.txtEdad.TabIndex = 8;
@@ -126,15 +128,24 @@ namespace Buscador
             this.lblActalizar.AutoSize = true;
             this.lblActalizar.Location = new System.Drawing.Point(553, 308);
             this.lblActalizar.Name = "lblActalizar";
-            this.lblActalizar.Size = new System.Drawing.Size(53, 13);
+            this.lblActalizar.Size = new System.Drawing.Size(0, 13);
             this.lblActalizar.TabIndex = 9;
-            this.lblActalizar.Text = "Actualizar";
+            // 
+            // btbActualizar
+            // 
+            this.btbActualizar.Location = new System.Drawing.Point(556, 292);
+            this.btbActualizar.Name = "btbActualizar";
+            this.btbActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btbActualizar.TabIndex = 10;
+            this.btbActualizar.Text = "Actualizar";
+            this.btbActualizar.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(649, 409);
+            this.Controls.Add(this.btbActualizar);
             this.Controls.Add(this.lblActalizar);
             this.Controls.Add(this.txtEdad);
             this.Controls.Add(this.lblEdad);
@@ -147,6 +158,7 @@ namespace Buscador
             this.Controls.Add(this.visorDatos);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.visorDatos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -165,6 +177,7 @@ namespace Buscador
         private System.Windows.Forms.Label lblEdad;
         private System.Windows.Forms.TextBox txtEdad;
         private System.Windows.Forms.Label lblActalizar;
+        private System.Windows.Forms.Button btbActualizar;
     }
 }
 
