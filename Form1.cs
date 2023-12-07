@@ -13,7 +13,7 @@ namespace Buscador
 {
     public partial class Form1 : Form
     {
-        public string cCadenaBuscar = "Escribir búsqueda...";
+        public string cCadenaBuscar = "Hacer una búsqueda...";
         public Form1()
         {
             InitializeComponent();
