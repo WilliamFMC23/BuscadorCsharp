@@ -126,5 +126,24 @@ namespace Buscador
         {
 
         }
+
+
+        private void visorDatos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow filaSeleccionada = visorDatos.Rows[e.RowIndex];
+            txtID.Text = filaSeleccionada.Cells["ID"].Value.ToString();
+            txtNombre.Text = filaSeleccionada.Cells["Nombre"].Value.ToString();
+            txtEdad.Text = filaSeleccionada.Cells["Edad"].Value.ToString();
+        }
+
+        private void btbActualizar_Click(object sender, EventArgs e)
+        {
+            int index = visorDatos.CurrentRow.Index;
+            DataGridViewRow filaSeleccionada = visorDatos.Rows[index];
+            filaSeleccionada.Cells["ID"].Value = txtID.Text;
+            filaSeleccionada.Cells["Nombre"].Value = txtNombre.Text;
+            filaSeleccionada.Cells["Edad"].Value = txtEdad.Text;
+            MessageBox.Show($"Se actualizó la fila {index + 1} de la lista, correctamente");
+        }
     }
 }

@@ -50,6 +50,7 @@ namespace Buscador
             this.visorDatos.Name = "visorDatos";
             this.visorDatos.Size = new System.Drawing.Size(445, 210);
             this.visorDatos.TabIndex = 0;
+            this.visorDatos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.visorDatos_CellClick);
             // 
             // txtBuscar
             // 
@@ -139,6 +140,7 @@ namespace Buscador
             this.btbActualizar.TabIndex = 10;
             this.btbActualizar.Text = "Actualizar";
             this.btbActualizar.UseVisualStyleBackColor = true;
+            this.btbActualizar.Click += new System.EventHandler(this.btbActualizar_Click);
             // 
             // Form1
             // 
