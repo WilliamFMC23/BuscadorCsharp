@@ -32,6 +32,13 @@ namespace Buscador
             this.visorDatos = new System.Windows.Forms.DataGridView();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblID = new System.Windows.Forms.Label();
+            this.txtID = new System.Windows.Forms.TextBox();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.lblEdad = new System.Windows.Forms.Label();
+            this.txtEdad = new System.Windows.Forms.TextBox();
+            this.lblActalizar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.visorDatos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,11 +71,77 @@ namespace Buscador
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 2;
             // 
+            // lblID
+            // 
+            this.lblID.AutoSize = true;
+            this.lblID.Location = new System.Drawing.Point(50, 295);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(18, 13);
+            this.lblID.TabIndex = 3;
+            this.lblID.Text = "ID";
+            this.lblID.Click += new System.EventHandler(this.lblID_Click);
+            // 
+            // txtID
+            // 
+            this.txtID.Location = new System.Drawing.Point(84, 295);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(100, 20);
+            this.txtID.TabIndex = 4;
+            // 
+            // lblNombre
+            // 
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(202, 298);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(44, 13);
+            this.lblNombre.TabIndex = 5;
+            this.lblNombre.Text = "Nombre";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(252, 298);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtNombre.TabIndex = 6;
+            // 
+            // lblEdad
+            // 
+            this.lblEdad.AutoSize = true;
+            this.lblEdad.Location = new System.Drawing.Point(368, 301);
+            this.lblEdad.Name = "lblEdad";
+            this.lblEdad.Size = new System.Drawing.Size(32, 13);
+            this.lblEdad.TabIndex = 7;
+            this.lblEdad.Text = "Edad";
+            // 
+            // txtEdad
+            // 
+            this.txtEdad.Location = new System.Drawing.Point(406, 301);
+            this.txtEdad.Name = "txtEdad";
+            this.txtEdad.Size = new System.Drawing.Size(100, 20);
+            this.txtEdad.TabIndex = 8;
+            this.txtEdad.TextChanged += new System.EventHandler(this.txtEdad_TextChanged);
+            // 
+            // lblActalizar
+            // 
+            this.lblActalizar.AutoSize = true;
+            this.lblActalizar.Location = new System.Drawing.Point(553, 308);
+            this.lblActalizar.Name = "lblActalizar";
+            this.lblActalizar.Size = new System.Drawing.Size(53, 13);
+            this.lblActalizar.TabIndex = 9;
+            this.lblActalizar.Text = "Actualizar";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 302);
+            this.ClientSize = new System.Drawing.Size(649, 409);
+            this.Controls.Add(this.lblActalizar);
+            this.Controls.Add(this.txtEdad);
+            this.Controls.Add(this.lblEdad);
+            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.lblNombre);
+            this.Controls.Add(this.txtID);
+            this.Controls.Add(this.lblID);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.visorDatos);
@@ -85,6 +158,13 @@ namespace Buscador
         private System.Windows.Forms.DataGridView visorDatos;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblID;
+        private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Label lblEdad;
+        private System.Windows.Forms.TextBox txtEdad;
+        private System.Windows.Forms.Label lblActalizar;
     }
 }
 

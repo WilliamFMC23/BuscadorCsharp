@@ -20,6 +20,7 @@ namespace Buscador
             txtBuscar.Text = cCadenaBuscar;
             txtBuscar.ForeColor = SystemColors.GrayText;
             visorDatos.DataSource = ObtenerDataTable();
+            lblID.Text = "ID";
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -104,6 +105,16 @@ namespace Buscador
             }
 
             return stringBuilder.ToString();
+        }
+
+        private void lblID_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEdad_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
