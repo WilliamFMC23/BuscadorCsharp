@@ -59,9 +59,7 @@ namespace Buscador
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(174, 22);
             this.txtBuscar.TabIndex = 1;
-            this.txtBuscar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtBuscar_MouseClick);
             this.txtBuscar.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.txtBuscar.DoubleClick += new System.EventHandler(this.txtBuscar_DoubleClick);
             this.txtBuscar.Enter += new System.EventHandler(this.txtBuscar_Enter);
             this.txtBuscar.Leave += new System.EventHandler(this.txtBuscar_Leave);
             // 
@@ -81,7 +79,6 @@ namespace Buscador
             this.lblID.Size = new System.Drawing.Size(18, 13);
             this.lblID.TabIndex = 3;
             this.lblID.Text = "ID";
-            this.lblID.Click += new System.EventHandler(this.lblID_Click);
             // 
             // txtID
             // 
@@ -89,7 +86,6 @@ namespace Buscador
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(100, 20);
             this.txtID.TabIndex = 4;
-            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
             // 
             // lblNombre
             // 
@@ -122,7 +118,6 @@ namespace Buscador
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(100, 20);
             this.txtEdad.TabIndex = 8;
-            this.txtEdad.TextChanged += new System.EventHandler(this.txtEdad_TextChanged);
             // 
             // lblActalizar
             // 

@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Projecto.Bussines\Projecto.Bussines.csproj">
+      <Project>{13DF9122-13BC-43D4-81E2-ABDBCAD30615}</Project>
+      <Name>Projecto.Bussines</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

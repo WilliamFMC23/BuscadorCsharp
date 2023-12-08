@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projecto.Bussines;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,21 +14,21 @@ namespace Buscador
 {
     public partial class Form1 : Form
     {
+        //Variable global para el servicio.
+        ClientesService srvClientes = new ClientesService();
         public string cCadenaBuscar = "Hacer una búsqueda...";
         public Form1()
         {
             InitializeComponent();
             txtBuscar.Text = cCadenaBuscar;
             txtBuscar.ForeColor = SystemColors.GrayText;
-            visorDatos.DataSource = ObtenerDataTable();
-            lblID.Text = "ID";
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             string textoBusqueda = txtBuscar.Text.ToLower();
-            DataRow[] filasFiltradas = ObtenerDataTable().Select($"Nombre LIKE '%{textoBusqueda}%'");
-            DataTable dataTableFiltrado = ObtenerDataTable().Clone();
+            DataRow[] filasFiltradas = srvClientes.obtenerTablaClientes().Select($"Nombre LIKE '%{textoBusqueda}%'");
+            DataTable dataTableFiltrado = srvClientes.obtenerTablaClientes().Clone();
             foreach (DataRow fila in filasFiltradas)
             {
                 dataTableFiltrado.ImportRow(fila);
@@ -39,7 +40,7 @@ namespace Buscador
         {
             if (txtBuscar.Text.Equals(cCadenaBuscar))
             {
-                visorDatos.DataSource = ObtenerDataTable();
+                visorDatos.DataSource = srvClientes.obtenerTablaClientes();
                 txtBuscar.Text = "";
                 txtBuscar.ForeColor = SystemColors.ControlText;
             }
@@ -51,82 +52,9 @@ namespace Buscador
             {
                 txtBuscar.Text = cCadenaBuscar;
                 txtBuscar.ForeColor = SystemColors.GrayText;
-                visorDatos.DataSource = ObtenerDataTable();
+                visorDatos.DataSource = srvClientes.obtenerTablaClientes();
             }
         }
-
-        private void txtBuscar_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void txtBuscar_DoubleClick(object sender, EventArgs e)
-        {
-        }
-
-        private DataTable ObtenerDataTable()
-        {
-            // Crear un DataTable con columnas
-            DataTable dataTable = new DataTable("EjemploDataTable");
-            dataTable.Columns.Add("ID", typeof(int));
-            dataTable.Columns.Add("Nombre", typeof(string));
-            dataTable.Columns.Add("Edad", typeof(int));
-
-            // Agregar filas al DataTable (puedes obtener estos datos de una base de datos, por ejemplo)
-            dataTable.Rows.Add(1, "Juan", 25);
-            dataTable.Rows.Add(2, "María", 30);
-            dataTable.Rows.Add(3, "Carlos", 22);
-            for (int i = 1; i <= 50; i++)
-            {
-                dataTable.Rows.Add(i, "Persona" + i, 20 + i);
-            }
-            return dataTable;
-        }
-
-        private DataTable BuscarElementoEnDataTable(string _cNombreBuscar, DataTable _dtDatos)
-        {
-            DataRow[] filasEncontradas = _dtDatos.Select($"Nombre = {QuitarDiacriticos(_cNombreBuscar)}");
-            DataTable dtResultado = new DataTable();
-            foreach (DataRow row in filasEncontradas)
-            {
-                dtResultado.ImportRow(row);
-            }
-            return dtResultado;
-        }
-
-        private string QuitarDiacriticos(string input)
-        {
-            string normalizedString = input.Normalize(NormalizationForm.FormD);
-            StringBuilder stringBuilder = new StringBuilder();
-
-            foreach (char c in normalizedString)
-            {
-                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                    stringBuilder.Append(c);
-            }
-
-            return stringBuilder.ToString();
-        }
-
-        private void lblID_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtEdad_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtID_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void visorDatos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -138,12 +66,16 @@ namespace Buscador
 
         private void btbActualizar_Click(object sender, EventArgs e)
         {
-            int index = visorDatos.CurrentRow.Index;
-            DataGridViewRow filaSeleccionada = visorDatos.Rows[index];
-            filaSeleccionada.Cells["ID"].Value = txtID.Text;
-            filaSeleccionada.Cells["Nombre"].Value = txtNombre.Text;
-            filaSeleccionada.Cells["Edad"].Value = txtEdad.Text;
-            MessageBox.Show($"Se actualizó la fila {index + 1} de la lista, correctamente");
+            DataGridViewRow filaSeleccionada = visorDatos.Rows[visorDatos.CurrentRow.Index];
+            string cMensaje = srvClientes.ActualizarCliente(txtNombre.Text, txtEdad.Text, filaSeleccionada.Cells["ID"].Value.ToString());
+            //Refrescar Grid.
+            visorDatos.DataSource = srvClientes.obtenerTablaClientes();
+            MessageBox.Show(cMensaje, "Información",MessageBoxButtons.OK,MessageBoxIcon.Information);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            visorDatos.DataSource = srvClientes.obtenerTablaClientes();
         }
     }
 }
