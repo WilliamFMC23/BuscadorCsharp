@@ -32,14 +32,7 @@ namespace Buscador
             this.visorDatos = new System.Windows.Forms.DataGridView();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblID = new System.Windows.Forms.Label();
-            this.txtID = new System.Windows.Forms.TextBox();
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.lblEdad = new System.Windows.Forms.Label();
-            this.txtEdad = new System.Windows.Forms.TextBox();
             this.lblActalizar = new System.Windows.Forms.Label();
-            this.btbActualizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.visorDatos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +43,8 @@ namespace Buscador
             this.visorDatos.Name = "visorDatos";
             this.visorDatos.Size = new System.Drawing.Size(445, 210);
             this.visorDatos.TabIndex = 0;
-            this.visorDatos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.visorDatos_CellClick);
+            this.visorDatos.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.visorDatos_CellEndEdit);
+            this.visorDatos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.visorDatos_KeyDown);
             // 
             // txtBuscar
             // 
@@ -71,54 +65,6 @@ namespace Buscador
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 2;
             // 
-            // lblID
-            // 
-            this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(50, 295);
-            this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(18, 13);
-            this.lblID.TabIndex = 3;
-            this.lblID.Text = "ID";
-            // 
-            // txtID
-            // 
-            this.txtID.Location = new System.Drawing.Point(85, 291);
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(100, 20);
-            this.txtID.TabIndex = 4;
-            // 
-            // lblNombre
-            // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(202, 298);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(44, 13);
-            this.lblNombre.TabIndex = 5;
-            this.lblNombre.Text = "Nombre";
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(252, 292);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 20);
-            this.txtNombre.TabIndex = 6;
-            // 
-            // lblEdad
-            // 
-            this.lblEdad.AutoSize = true;
-            this.lblEdad.Location = new System.Drawing.Point(368, 301);
-            this.lblEdad.Name = "lblEdad";
-            this.lblEdad.Size = new System.Drawing.Size(32, 13);
-            this.lblEdad.TabIndex = 7;
-            this.lblEdad.Text = "Edad";
-            // 
-            // txtEdad
-            // 
-            this.txtEdad.Location = new System.Drawing.Point(406, 292);
-            this.txtEdad.Name = "txtEdad";
-            this.txtEdad.Size = new System.Drawing.Size(100, 20);
-            this.txtEdad.TabIndex = 8;
-            // 
             // lblActalizar
             // 
             this.lblActalizar.AutoSize = true;
@@ -127,35 +73,17 @@ namespace Buscador
             this.lblActalizar.Size = new System.Drawing.Size(0, 13);
             this.lblActalizar.TabIndex = 9;
             // 
-            // btbActualizar
-            // 
-            this.btbActualizar.Location = new System.Drawing.Point(556, 292);
-            this.btbActualizar.Name = "btbActualizar";
-            this.btbActualizar.Size = new System.Drawing.Size(75, 23);
-            this.btbActualizar.TabIndex = 10;
-            this.btbActualizar.Text = "Actualizar";
-            this.btbActualizar.UseVisualStyleBackColor = true;
-            this.btbActualizar.Click += new System.EventHandler(this.btbActualizar_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 409);
-            this.Controls.Add(this.btbActualizar);
+            this.ClientSize = new System.Drawing.Size(502, 299);
             this.Controls.Add(this.lblActalizar);
-            this.Controls.Add(this.txtEdad);
-            this.Controls.Add(this.lblEdad);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.txtID);
-            this.Controls.Add(this.lblID);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.visorDatos);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.visorDatos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -167,14 +95,7 @@ namespace Buscador
         private System.Windows.Forms.DataGridView visorDatos;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblID;
-        private System.Windows.Forms.TextBox txtID;
-        private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Label lblEdad;
-        private System.Windows.Forms.TextBox txtEdad;
         private System.Windows.Forms.Label lblActalizar;
-        private System.Windows.Forms.Button btbActualizar;
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using Projecto.Bussines;
+using Projecto.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,12 +17,19 @@ namespace Buscador
     {
         //Variable global para el servicio.
         ClientesService srvClientes = new ClientesService();
+        //Variable global;
+        List<Cliente> lstClientes = new List<Cliente>();
         public string cCadenaBuscar = "Hacer una búsqueda...";
         public Form1()
         {
             InitializeComponent();
             txtBuscar.Text = cCadenaBuscar;
             txtBuscar.ForeColor = SystemColors.GrayText;
+            visorDatos.DataSource = srvClientes.obtenerTablaClientes();
+            visorDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            visorDatos.AllowUserToResizeRows = false;
+            visorDatos.AllowUserToDeleteRows = false;
+            visorDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -56,26 +64,88 @@ namespace Buscador
             }
         }
 
-        private void visorDatos_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void visorDatos_KeyDown(object sender, KeyEventArgs e)
         {
-            DataGridViewRow filaSeleccionada = visorDatos.Rows[e.RowIndex];
-            txtID.Text = filaSeleccionada.Cells["ID"].Value.ToString();
-            txtNombre.Text = filaSeleccionada.Cells["Nombre"].Value.ToString();
-            txtEdad.Text = filaSeleccionada.Cells["Edad"].Value.ToString();
+            //Al presionar Shift + Click izquierdo.
+            int totalFilas = 0;
+            if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+            {
+                if (Control.MouseButtons == MouseButtons.Left)
+                {
+                    DataGridViewSelectedRowCollection filasMarcadas = visorDatos.SelectedRows;
+                    totalFilas = filasMarcadas.Count;
+                    foreach (DataGridViewRow row in filasMarcadas)
+                    {
+                        Cliente entCliente = new Cliente
+                        {
+                            id = Convert.ToInt32(row.Cells["ID"].Value)
+                        };
+                        lstClientes.Add(entCliente);
+                    }
+                }
+            }
+
+            //Cuando desee eliminar
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (visorDatos.SelectedRows.Count > 0)
+                {
+                    DialogResult respuesta = MessageBox.Show(this, $"¿Realmente desea Eliminar {visorDatos.SelectedRows.Count} Registros?", "Confirmación", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Warning);
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        string cMensaje = srvClientes.eliminarCliente(lstClientes);
+                        visorDatos.DataSource = srvClientes.obtenerTablaClientes();
+                        MessageBox.Show(cMensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se ha seleccionado registros.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
 
-        private void btbActualizar_Click(object sender, EventArgs e)
+        private void visorDatos_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow filaSeleccionada = visorDatos.Rows[visorDatos.CurrentRow.Index];
-            string cMensaje = srvClientes.ActualizarCliente(txtNombre.Text, txtEdad.Text, filaSeleccionada.Cells["ID"].Value.ToString());
-            //Refrescar Grid.
-            visorDatos.DataSource = srvClientes.obtenerTablaClientes();
-            MessageBox.Show(cMensaje, "Información",MessageBoxButtons.OK,MessageBoxIcon.Information);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            visorDatos.DataSource = srvClientes.obtenerTablaClientes();
+            if (e.ColumnIndex == visorDatos.Columns.Count - 1)
+            {
+                try
+                {
+                    visorDatos.CellEndEdit -= visorDatos_CellEndEdit;
+                    Cliente entCliente = new Cliente();
+                    {
+                        DataGridViewRow filaSeleccionada = visorDatos.Rows[visorDatos.CurrentRow.Index];
+                        entCliente.id = Convert.ToInt32(filaSeleccionada.Cells["id"].Value);
+                        entCliente.cNombre = filaSeleccionada.Cells["Nombre"].Value.ToString();
+                        entCliente.cEdad = filaSeleccionada.Cells["Edad"].Value.ToString();
+                        Cliente entRecuperado = srvClientes.ObtenerCliente(Convert.ToInt32(filaSeleccionada.Cells["id"].Value));
+                        if (entRecuperado != null)
+                        {
+                            DialogResult result = MessageBox.Show($"Ya existe un cliente con el ID {entCliente.id} \n¿Desea Actualizar?", "Información", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                            if(result == DialogResult.Yes)
+                            {
+                                string cMensaje = srvClientes.ActualizarCliente(entCliente.cNombre, entCliente.cEdad, entCliente.id.ToString());
+                                visorDatos.DataSource = srvClientes.obtenerTablaClientes();
+                                MessageBox.Show(cMensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        else
+                        {
+                            string cMensaje = srvClientes.guardarCliente(entCliente);
+                            MessageBox.Show(cMensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        visorDatos.DataSource = srvClientes.obtenerTablaClientes();
+                    }
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show($"Ocurrió el siguiente Error {error.Message}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    visorDatos.CellEndEdit += visorDatos_CellEndEdit;
+                }
+            }
         }
     }
 }
