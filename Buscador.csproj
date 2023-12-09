@@ -80,13 +80,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Projecto.Bussines\Projecto.Bussines.csproj">
+    <ProjectReference Include="..\Projecto.Bussines\Clientes.Bussines.csproj">
       <Project>{13DF9122-13BC-43D4-81E2-ABDBCAD30615}</Project>
-      <Name>Projecto.Bussines</Name>
+      <Name>Clientes.Bussines</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Projecto.Data.Models\Projecto.Data.Models.csproj">
+    <ProjectReference Include="..\Projecto.Data.Models\Clientes.Data.Models.csproj">
       <Project>{52F3950D-ECBD-4184-BFB4-F9E062513979}</Project>
-      <Name>Projecto.Data.Models</Name>
+      <Name>Clientes.Data.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

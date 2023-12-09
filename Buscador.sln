@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buscador", "Buscador.csproj", "{FC832F48-237A-4EA9-A661-9275AC2D715F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projecto.Bussines", "..\Projecto.Bussines\Projecto.Bussines.csproj", "{13DF9122-13BC-43D4-81E2-ABDBCAD30615}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clientes.Bussines", "..\Projecto.Bussines\Clientes.Bussines.csproj", "{13DF9122-13BC-43D4-81E2-ABDBCAD30615}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projecto.Data", "..\Projecto.Data\Projecto.Data.csproj", "{8660689D-24FC-4628-9622-9DF44200D417}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clientes.Data", "..\Projecto.Data\Clientes.Data.csproj", "{8660689D-24FC-4628-9622-9DF44200D417}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projecto.Objetos", "..\Projecto.Objetos\Projecto.Objetos.csproj", "{35CBC1F4-5DB8-4FB0-BE18-CC756829FE0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clientes.Objetos", "..\Projecto.Objetos\Clientes.Objetos.csproj", "{35CBC1F4-5DB8-4FB0-BE18-CC756829FE0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projecto.Data.Models", "..\Projecto.Data.Models\Projecto.Data.Models.csproj", "{52F3950D-ECBD-4184-BFB4-F9E062513979}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clientes.Data.Models", "..\Projecto.Data.Models\Clientes.Data.Models.csproj", "{52F3950D-ECBD-4184-BFB4-F9E062513979}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
