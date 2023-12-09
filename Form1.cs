@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,6 +33,7 @@ namespace Buscador
             visorDatos.AllowUserToDeleteRows = false;
             visorDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             barraCarga.Visible = false;
+            lblOperacion.Visible = false;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -106,9 +108,12 @@ namespace Buscador
                     DialogResult respuesta = MessageBox.Show(this, $"¿Realmente desea Eliminar {visorDatos.SelectedRows.Count} Registros?", "Confirmación", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Warning);
                     if (respuesta == DialogResult.Yes)
                     {
+                        lblOperacion.Text = "Borrando información...";
+                        lblOperacion.Visible = true;
                         barraCarga.Visible = true;
+                        this.Refresh();
                         //En este punto vamos a esperar que termine la carga de la barra de progreso.
-                        CargarBarra();
+                        CargarBarra(lstClientes.Count);
                         string cMensaje = srvClientes.eliminarCliente(lstClientes);
                         visorDatos.DataSource = srvClientes.obtenerTablaClientes();
                         if(barraCarga.Value == barraCarga.Maximum)
@@ -116,6 +121,8 @@ namespace Buscador
                             MessageBox.Show(cMensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             barraCarga.Value = 0;
                             barraCarga.Visible = false;
+                            lblOperacion.Text = "";
+                            lblOperacion.Visible = false;
                         } 
                     }
                 }
@@ -169,15 +176,56 @@ namespace Buscador
             }
         }
 
-        private void CargarBarra()
+        private void CargarBarra(int _iMaxDatos)
         {
-            int max = lstClientes.Count;
-            barraCarga.Maximum = max;
+            barraCarga.Maximum = _iMaxDatos;
             
-            for (int i = 0; i < max; i++)
+            for (int i = 0; i < _iMaxDatos; i++)
             {
                 barraCarga.Value = i + 1;
                 Thread.Sleep(100);
+            }
+        }
+
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog archivoDialogo = new OpenFileDialog();
+            archivoDialogo.Filter = "Archivos Excel|*.xls;*.xlsx|Todos los archivos|*.*";
+            archivoDialogo.Title = "Seleccionar Archivo Excel";
+            archivoDialogo.Multiselect = false;
+
+            if (archivoDialogo.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    DataTable dtFinal = srvClientes.ObtenerDatosExcel(archivoDialogo.FileName);
+                    List<Cliente> lstClientes = srvClientes.ObtenerListadoClientes(dtFinal);
+                    visorDatos.Columns.Clear();
+                    visorDatos.DataSource = dtFinal;
+                    DialogResult respuesta = MessageBox.Show($"Carga exitosa de {visorDatos.RowCount - 1} registros.\n ¿Desea Guardarlos en el sistema?", "Operación Exitosa", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if(respuesta == DialogResult.Yes)
+                    {
+                        lblOperacion.Text = "Guardando información...";
+                        lblOperacion.Visible = true;
+                        barraCarga.Visible = true;
+                        this.Refresh();
+                        CargarBarra(lstClientes.Count);
+                        string cMensaje = srvClientes.GuardarClienteMasivo(lstClientes);
+                        if (barraCarga.Value == barraCarga.Maximum)
+                        {
+                            MessageBox.Show(cMensaje, "Información del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            visorDatos.DataSource = srvClientes.obtenerTablaClientes();
+                            barraCarga.Visible = false;
+                            barraCarga.Value = 0;
+                            lblOperacion.Text = "";
+                            lblOperacion.Visible = false;
+                        }
+                    }
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error al importar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }
