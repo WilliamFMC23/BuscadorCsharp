@@ -106,13 +106,11 @@ namespace Buscador
                     DialogResult respuesta = MessageBox.Show(this, $"¿Realmente desea Eliminar {visorDatos.SelectedRows.Count} Registros?", "Confirmación", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Warning);
                     if (respuesta == DialogResult.Yes)
                     {
-                        //Mostrar barra carga.
                         barraCarga.Visible = true;
+                        //En este punto vamos a esperar que termine la carga de la barra de progreso.
+                        CargarBarra();
                         string cMensaje = srvClientes.eliminarCliente(lstClientes);
                         visorDatos.DataSource = srvClientes.obtenerTablaClientes();
-                        //En este punto vamos a esperar que termine la carga de la barra de progreso.
-                        barraCarga.Value = 100;
-                        CargarBarra();
                         if(barraCarga.Value == barraCarga.Maximum)
                         {
                             MessageBox.Show(cMensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -173,9 +171,13 @@ namespace Buscador
 
         private void CargarBarra()
         {
-            for (int i = 0; i < visorDatos.SelectedRows.Count; i++)
+            int max = lstClientes.Count;
+            barraCarga.Maximum = max;
+            
+            for (int i = 0; i < max; i++)
             {
-                barraCarga.Value += i;
+                barraCarga.Value = i + 1;
+                Thread.Sleep(100);
             }
         }
     }
