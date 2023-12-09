@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -30,6 +31,7 @@ namespace Buscador
             visorDatos.AllowUserToResizeRows = false;
             visorDatos.AllowUserToDeleteRows = false;
             visorDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            barraCarga.Visible = false;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -90,12 +92,33 @@ namespace Buscador
             {
                 if (visorDatos.SelectedRows.Count > 0)
                 {
+                    DataGridViewSelectedRowCollection filasMarcadas = visorDatos.SelectedRows;
+                    totalFilas = filasMarcadas.Count;
+                    foreach (DataGridViewRow row in filasMarcadas)
+                    {
+                        Cliente entCliente = new Cliente
+                        {
+                            id = Convert.ToInt32(row.Cells["ID"].Value)
+                        };
+                        lstClientes.Add(entCliente);
+                    }
+
                     DialogResult respuesta = MessageBox.Show(this, $"¿Realmente desea Eliminar {visorDatos.SelectedRows.Count} Registros?", "Confirmación", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Warning);
                     if (respuesta == DialogResult.Yes)
                     {
+                        //Mostrar barra carga.
+                        barraCarga.Visible = true;
                         string cMensaje = srvClientes.eliminarCliente(lstClientes);
                         visorDatos.DataSource = srvClientes.obtenerTablaClientes();
-                        MessageBox.Show(cMensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //En este punto vamos a esperar que termine la carga de la barra de progreso.
+                        barraCarga.Value = 100;
+                        CargarBarra();
+                        if(barraCarga.Value == barraCarga.Maximum)
+                        {
+                            MessageBox.Show(cMensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            barraCarga.Value = 0;
+                            barraCarga.Visible = false;
+                        } 
                     }
                 }
                 else
@@ -145,6 +168,14 @@ namespace Buscador
                 {
                     visorDatos.CellEndEdit += visorDatos_CellEndEdit;
                 }
+            }
+        }
+
+        private void CargarBarra()
+        {
+            for (int i = 0; i < visorDatos.SelectedRows.Count; i++)
+            {
+                barraCarga.Value += i;
             }
         }
     }

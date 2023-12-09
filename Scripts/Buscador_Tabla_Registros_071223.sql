@@ -6,6 +6,12 @@ nombre varchar(30),
 edad int
 )
 
+
+
+DECLARE @num INT = 0;
+
+WHILE @num < 1000
+BEGIN
 INSERT INTO clientes(nombre, edad)
 VALUES
     ('Juan Pérez', 25),
@@ -87,3 +93,6 @@ VALUES
     ('Maximiliano Ramírez', 36),
     ('Daniela Pérez', 29),
     ('Hugo Medina', 37);
+    SET @num = @num + 1;
+END;
+

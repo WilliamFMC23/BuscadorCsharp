@@ -33,6 +33,7 @@ namespace Buscador
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblActalizar = new System.Windows.Forms.Label();
+            this.barraCarga = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.visorDatos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,11 +74,19 @@ namespace Buscador
             this.lblActalizar.Size = new System.Drawing.Size(0, 13);
             this.lblActalizar.TabIndex = 9;
             // 
+            // barraCarga
+            // 
+            this.barraCarga.Location = new System.Drawing.Point(342, 13);
+            this.barraCarga.Name = "barraCarga";
+            this.barraCarga.Size = new System.Drawing.Size(137, 21);
+            this.barraCarga.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 299);
+            this.ClientSize = new System.Drawing.Size(502, 284);
+            this.Controls.Add(this.barraCarga);
             this.Controls.Add(this.lblActalizar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBuscar);
@@ -96,6 +105,7 @@ namespace Buscador
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblActalizar;
+        private System.Windows.Forms.ProgressBar barraCarga;
     }
 }
 
