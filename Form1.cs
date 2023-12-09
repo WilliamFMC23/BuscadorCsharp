@@ -221,6 +221,10 @@ namespace Buscador
                             lblOperacion.Visible = false;
                         }
                     }
+                    else if(respuesta == DialogResult.No || respuesta == DialogResult.Cancel)
+                    {
+                        visorDatos.DataSource = srvClientes.obtenerTablaClientes();
+                    }
                 }
                 catch (Exception error)
                 {
