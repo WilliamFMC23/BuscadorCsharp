@@ -38,6 +38,7 @@ namespace Buscador
             this.btnImportar = new System.Windows.Forms.ToolStripButton();
             this.barraCarga = new System.Windows.Forms.ProgressBar();
             this.lblOperacion = new System.Windows.Forms.Label();
+            this.lblConteo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.visorDatos)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -114,11 +115,21 @@ namespace Buscador
             this.lblOperacion.Size = new System.Drawing.Size(0, 13);
             this.lblOperacion.TabIndex = 12;
             // 
+            // lblConteo
+            // 
+            this.lblConteo.AutoSize = true;
+            this.lblConteo.Location = new System.Drawing.Point(12, 287);
+            this.lblConteo.Name = "lblConteo";
+            this.lblConteo.Size = new System.Drawing.Size(102, 13);
+            this.lblConteo.TabIndex = 13;
+            this.lblConteo.Text = "Conteo de Clientes: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 314);
+            this.ClientSize = new System.Drawing.Size(468, 332);
+            this.Controls.Add(this.lblConteo);
             this.Controls.Add(this.lblOperacion);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.barraCarga);
@@ -146,6 +157,7 @@ namespace Buscador
         private System.Windows.Forms.ToolStripButton btnImportar;
         private System.Windows.Forms.ProgressBar barraCarga;
         private System.Windows.Forms.Label lblOperacion;
+        private System.Windows.Forms.Label lblConteo;
     }
 }
 

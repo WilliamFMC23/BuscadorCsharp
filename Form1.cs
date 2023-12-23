@@ -34,6 +34,7 @@ namespace Buscador
             visorDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             barraCarga.Visible = false;
             lblOperacion.Visible = false;
+            lblConteo.Text += srvClientes.ObtenerTotalRows();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
